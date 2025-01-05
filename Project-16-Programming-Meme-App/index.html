@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programming Memes Gallery</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1a1a1a;
+        }
+
+        .meme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .meme-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .meme-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .meme-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .meme-info {
+            padding: 15px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .action-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: bold;
+            transition: background-color 0.2s;
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .action-btn:hover {
+            opacity: 0.9;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        .error {
+            text-align: center;
+            padding: 20px;
+            color: #c62828;
+            background-color: #ffebee;
+            border-radius: 5px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        @media (max-width: 600px) {
+            .meme-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Programming Memes Gallery</h1>
+        <p>Share and download your favorite programming memes!</p>
+    </div>
+    <div class="meme-grid" id="memeGrid">
+        <div class="loading">Loading memes...</div>
+    </div>
+
+    <script>
+        async function fetchMemes() {
+            const url = 'https://programming-memes-images.p.rapidapi.com/v1/memes';
+            const options = {
+                method: 'GET',
+                headers: {
+                    'x-rapidapi-key': '',
+                    'x-rapidapi-host': 'programming-memes-images.p.rapidapi.com'
+                }
+            };
+
+            try {
+                const response = await fetch(url, options);
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error fetching memes:', error);
+                throw error;
+            }
+        }
+
+        function createMemeCard(meme) {
+            return `
+                <div class="meme-card" data-id="${meme.id}">
+                    <img src=${meme.image} alt="Programming meme" class="meme-image">
+                    <div class="meme-info">
+                        <div class="stats">
+                            <span>👍 ${meme.upvotes} upvotes</span>
+                            <span>👎 ${meme.downvotes} downvotes</span>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="action-btn" onclick="downloadMeme('${meme.image}')">
+                                📥 Download
+                            </button>
+                            <button class="action-btn" onclick="shareMeme('${meme.image}')">
+                                📤 Share
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function downloadMeme(imageUrl) {
+            try {
+                const response = await fetch(imageUrl);
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `programming-meme-${Date.now()}.jpg`;
+                document.body.appendChild(a);
+                a.click();
+                window.URL.revokeObjectURL(url);
+                document.body.removeChild(a);
+            } catch (error) {
+                console.error('Error downloading meme:', error);
+                alert('Failed to download meme. Please try again.');
+            }
+        }
+
+        async function shareMeme(imageUrl) {
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: 'Check out this programming meme!',
+                        text: 'I found this funny programming meme',
+                        url: imageUrl
+                    });
+                } catch (error) {
+                    console.error('Error sharing:', error);
+                }
+            } else {
+                // Fallback for browsers that don't support Web Share API
+                navigator.clipboard.writeText(imageUrl).then(() => {
+                    alert('Meme URL copied to clipboard!');
+                }).catch(() => {
+                    alert('Failed to copy URL. Please try again.');
+                });
+            }
+        }
+
+        async function initializeGallery() {
+            const memeGrid = document.getElementById('memeGrid');
+            try {
+                const memes = await fetchMemes();
+                memeGrid.innerHTML = memes.map(createMemeCard).join('');
+            } catch (error) {
+                memeGrid.innerHTML = `
+                    <div class="error">
+                        Failed to load memes. Please refresh the page to try again.
+                    </div>
+                `;
+            }
+        }
+        document.addEventListener('DOMContentLoaded', initializeGallery);
+    </script>
+</body>
+</html>
