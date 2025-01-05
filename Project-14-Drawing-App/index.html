@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DrawMe | Fun & free drawing app</title>
+  <link rel="stylesheet" href="assets/css/index.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <link rel="shortcut icon" href="assets/images/faviconImage.png" type="image/x-icon">
+</head>
+<body>
+  <main class="main">
+    <section class="tools">
+      <div class="row">
+        <label for="" class="title">Formes</label>
+        <ul class="options">
+          <li class="option tool" id="rectangle">
+            <i class="fa-regular fa-square"></i>
+            <span>Rectangle</span>
+          </li>
+          <li class="option tool" id="circle">
+            <i class="fa-regular fa-circle"></i>
+            <span>Cercle</span>
+          </li>
+          <li class="option tool" id="triangle">
+            <i class="fa-solid fa-play"></i>
+            <span>Triangle</span>
+          </li>
+          <li class="option">
+            <input type="checkbox" id="fill-color" />
+            <label for="fill-color">Remplissage</label>
+          </li>
+        </ul>
+      </div>
+      <div class="row">
+        <label for="" class="title">Options</label>
+        <ul class="options">
+          <li class="option active tool" id="brush">
+            <i class="fa-solid fa-paintbrush"></i>
+            <span>Pinceau</span>
+          </li>
+          <li class="option tool" id="eraser">
+            <i class="fa-solid fa-eraser"></i>
+            <span>Gomme</span>
+          </li>
+          <li class="option">
+            <input type="range" id="size-slider" min="1" max="30" value="5" />
+            <label for="size-slider">Epaisseur</label>
+          </li>
+        </ul>
+      </div>
+      <div class="row colors">
+        <label for="" class="title">Couleurs</label>
+        <ul class="options">
+          <li class="option"></li>
+          <li class="option selected"></li>
+          <li class="option"></li>
+          <li class="option"></li>
+          <li class="option">
+            <input type="color" id="color-picker" value="#4A98F7" />
+          </li>
+        </ul>
+      </div>
+      <div class="row buttons">
+        <button class="clear-canvas">Nettoyer le tableau</button>
+        <button class="save-img">Enregistrer en image</button>
+      </div>
+    </section>
+    <section class="app">
+      <canvas></canvas>
+    </section>
+  </main>
+
+
+  <footer class="footer">
+    <p>© 2024 Oumarou Sanda Souley</p>
+    <a href="https://github.com/OumarouSandaSouley" target="_blank" class="github-link">
+      <i class="fab fa-github"></i>
+    </a>
+  </footer>
+
+  <script src="assets/js/index.js"></script>
+</body>
+</html>

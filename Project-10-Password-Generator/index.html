@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Password Generator</title>
+    <link rel="stylesheet" href="assets/css/index.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1 class="heading">Generateur de Mot de Passe</h1>
+      <p class="text-help">
+        Choisissez le type de données et la longeur puis cliquez sur
+        <span>Génerer</span> pour génerer votre mot de passe sécurisé
+      </p>
+      <div class="form-container">
+        <div class="pass-size">
+          <label for="size">Longeur du mot de passe</label>
+          <input type="text" id="size" placeholder="Ex: 6" />
+        </div>
+        <div class="data-type-container">
+          <h4>
+            Choisissez le type de données que doit avoir votre mot de passe.
+          </h4>
+          <p class="text-help">Cochez-en autant que disponible</p>
+          <div class="data-type">
+            <div class="data">
+              <input type="checkbox" name="" id="letters" />
+              <label for="letters">Lettres alphabétiques</label>
+            </div>
+            <div class="data">
+              <input type="checkbox" name="" id="numbers" />
+              <label for="numbers">Chiffres</label>
+            </div>
+            <div class="data">
+              <input type="checkbox" name="" id="characters" />
+              <label for="characters">Charactères spéciaux</label>
+            </div>
+          </div>
+        </div>
+        <div class="consent-uppercase">
+          <input type="checkbox" name="" id="uppercase" checked />
+          <label for="uppercase">Inclure la majuscule</label>
+        </div>
+      </div>
+      <div class="result">
+        <h4>Votre Mot de Passe:</h4>
+
+        <div class="">
+          <h5 id="result">PMLPMKJ888</h5>
+          <button id="copy">Copier</button>
+        </div>
+      </div>
+      <div class="generatecontainer">
+        <button class="generate" id="generate">Génerer</button>
+      </div>
+    </main>
+
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>

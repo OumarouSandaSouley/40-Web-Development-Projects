@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Racourcisseur d'URL</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1 class="heading-title">Racourcisseur d'URL</h1>
+        <p class="text-help">Entrez votre long URL et cliquez sur le bouton raccourcir</p>
+      </header>
+      
+      <main>
+        <div class="form-container" aria-labelledby="url-input">
+          <label for="url" id="url-input">Entrez votre URL:</label>
+          <input type="url" id="url" placeholder="https://example.com" required>
+          <button type="button" id="validate">Raccourcir</button>
+        </div>
+
+        <div class="result-container" aria-labelledby="result-output">
+          <label for="urlResult" id="result-output">URL Raccourcie:</label>
+          <input type="text" id="urlResult" readonly>
+          <div class="action-btns">
+          <button type="button"><a id="view" href="#" target="_blank">Voir</a></button>
+          <button type="button" id="copy">Copier</button>
+          </div>
+
+        </div>
+      </main>
+    </div>
+    
+    <script src="assets/js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </body>
+</html>
