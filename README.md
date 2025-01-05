@@ -118,6 +118,12 @@ This collection showcases **40 web development projects** built using **HTML**, 
 
 ---
 
+### Project 16: **Programming Memes Gallery**  
+- **Description:**  
+  A dynamic web application that fetches and displays programming memes from the RapidAPI Memes API. Features include a responsive grid layout, download capabilities, social sharing functionality, and vote display. The app provides a smooth user experience with error handling and fallback options for various browser capabilities.
+- **Tech Stack:**  
+  HTML, CSS, JavaScript, RapidAPI  
+
 ## Explore All 40 Projects  
 
 ![Image: 40 Web Development Projects](base.jpg)  
